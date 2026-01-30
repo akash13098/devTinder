@@ -41,3 +41,30 @@ app.use('/user',(req,res,next)=>{
 },(req,res)=>{
     res.send('im 5th')
 },)
+
+app.use('/admin',(req,res,next)=>{
+    const token="xyz"
+    const admin=token==="xyz"
+    if(!admin){
+        res.status(401).send('authentication failed')
+    }
+    else{
+        next()
+    }
+})
+
+app.get('/admin/getdata',(req,res)=>{
+    res.send('hello admin')
+})
+
+app.get('/admin/deletdata',(req,res)=>{
+    res.send('hello admin..')
+})
+
+
+
+
+// app.use('/admin',(req,res,next)=>{
+//     res.send('hello. admin')
+//     next()
+// })
