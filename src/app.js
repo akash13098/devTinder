@@ -1,5 +1,7 @@
 const express=require('express')
+
 const app=express()
+const {adminauth}=require('./middlewares/auth')
 app.listen(3000,()=>{
     console.log('im running')
 })
@@ -42,17 +44,8 @@ app.use('/user',(req,res,next)=>{
     res.send('im 5th')
 },)
 
-app.use('/admin',(req,res,next)=>{
-    const token="xyz"
-    const admin=token==="xyz"
-    if(!admin){
-        res.status(401).send('authentication failed')
-    }
-    else{
-        next()
-    }
-})
 
+app.use('/admin',adminauth)
 app.get('/admin/getdata',(req,res)=>{
     res.send('hello admin')
 })
