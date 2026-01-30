@@ -26,3 +26,18 @@ app.get('/abc/:abcid/:name', (req, res) => {
     console.log(req.params)
     res.send('hello world');
 });
+
+app.use('/user',(req,res,next)=>{
+    // res.send('im 1st')
+    next()
+},(req,res,next)=>{
+    // res.send('im 2nd')
+    next()
+},(req,res,next)=>{
+    // res.send('im 3rd')
+    next()
+},(req,res)=>{
+    res.send('im 4th')
+},(req,res)=>{
+    res.send('im 5th')
+},)
