@@ -61,3 +61,18 @@ app.get('/admin/deletdata',(req,res)=>{
 //     res.send('hello. admin')
 //     next()
 // })
+
+
+
+app.get('/getuserdata',(req,res)=>{
+    throw new Error('error')
+    res.send('hello user')
+})
+app.use('/',(req,res)=>{
+    res.send('im false')
+})
+app.use((err,req,res,next)=>{
+    if(err){
+    res.status(500).send('something wrong')
+    }
+})
