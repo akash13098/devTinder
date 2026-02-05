@@ -40,6 +40,20 @@ app.post('/client',async(req,res)=>{
     }
 })
 app.post('/login',async(req,res)=>{
+    const client=new Login({
+        firstName:"jay",
+        lastName:"sharma",
+        email:"jay@gmail.com"
+    })
+    try{
+        await client.save()
+        res.send('cliented added succesfully')
+    }
+    catch{
+        res.status(400).send('something went wrong')
+    }
+})
+app.get('/login',async(req,res)=>{
     console.log(req.body)
     
     const login=new User(req.body)
@@ -50,8 +64,7 @@ app.post('/login',async(req,res)=>{
 app.get("/feed",async(req,res)=>{
     const user=req.body.email
     try{
-        const feed=await Login.find({email:req.body.email})
-    // console.log(feed)
+        const feed=await Login.findOne({email:req.body.email})
     if(feed.length===0){
         res.send('user not found')
     }
@@ -64,6 +77,11 @@ app.get("/feed",async(req,res)=>{
 
     }
 })
+app.delete('/login',async(req,res)=>{
+    const login=await Login.findByIdAndDelete({_id:req.body._id})
+    res.send('deleted login')
+})
+
 
 // app.use("/jk",(req,res)=>{
 //     res.send('im jk')
