@@ -42,9 +42,27 @@ app.post('/client',async(req,res)=>{
 app.post('/login',async(req,res)=>{
     console.log(req.body)
     
-    const login=new Login(req.body)
+    const login=new User(req.body)
     await login.save()
     res.send('user added Successfully')
+})
+
+app.get("/feed",async(req,res)=>{
+    const user=req.body.email
+    try{
+        const feed=await Login.find({email:req.body.email})
+    // console.log(feed)
+    if(feed.length===0){
+        res.send('user not found')
+    }
+    else{
+        res.send(feed)
+    }
+    }
+    catch(err){
+        res.send(err)
+
+    }
 })
 
 // app.use("/jk",(req,res)=>{
