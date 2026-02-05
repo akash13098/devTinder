@@ -15,7 +15,7 @@ connectDB()
 .catch((err)=>{
     console.log("failed to connect DB",err)
 })
-
+app.use(express.json())
 app.post('/signup',async(req,res)=>{
     const user=new User({
         firstName:"om",
@@ -40,12 +40,10 @@ app.post('/client',async(req,res)=>{
     }
 })
 app.post('/login',async(req,res)=>{
-    const llogin=new Login({
-        firstName:"om",
-        lastName:"patil",
-        email:"om@gmail.com"
-    })
-    await llogin.save()
+    console.log(req.body)
+    
+    const login=new Login(req.body)
+    await login.save()
     res.send('user added Successfully')
 })
 
