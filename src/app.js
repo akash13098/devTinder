@@ -3,6 +3,7 @@ const express=require('express')
 const connectDB=require('./config/database')
 const app=express()
 const {adminauth}=require('./middlewares/auth')
+const {User,Client,Login}=require('./models/user')
 
 connectDB()
 .then(()=>{
@@ -13,6 +14,39 @@ connectDB()
 })
 .catch((err)=>{
     console.log("failed to connect DB",err)
+})
+
+app.post('/signup',async(req,res)=>{
+    const user=new User({
+        firstName:"om",
+        lastName:"patil",
+        email:"om@gmail.com"
+    })
+    await user.save()
+    res.send('user added Successfully')
+})
+app.post('/client',async(req,res)=>{
+    const client=new Client({
+        firstName:"jay",
+        lastName:"sharma",
+        email:"jay@gmail.com"
+    })
+    try{
+        await client.save()
+        res.send('cliented added succesfully')
+    }
+    catch{
+        res.status(400).send('something went wrong')
+    }
+})
+app.post('/login',async(req,res)=>{
+    const llogin=new Login({
+        firstName:"om",
+        lastName:"patil",
+        email:"om@gmail.com"
+    })
+    await llogin.save()
+    res.send('user added Successfully')
 })
 
 // app.use("/jk",(req,res)=>{

@@ -9,9 +9,9 @@ const userSchema=new mongoose.Schema({
     email:{
         type:String
     },
-    age:{
-        type:Number
-    },
+    // age:{
+    //     type:Number
+    // },
     gender:{
         type:String
     },
@@ -21,4 +21,9 @@ const userSchema=new mongoose.Schema({
 })
 
 const User=mongoose.model('user',userSchema)
-module.exports=User
+const Client=mongoose.model('client',userSchema)
+const Login=mongoose.model('login',userSchema)
+
+module.exports={
+    User,Client,Login
+}
