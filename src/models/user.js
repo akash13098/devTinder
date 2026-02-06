@@ -7,16 +7,23 @@ const userSchema=new mongoose.Schema({
         type:String
     },
     email:{
-        type:String
+        type:String,
+        required:true,
+        unique: true,
     },
-    // age:{
-    //     type:Number
-    // },
+    age:{
+        type:Number,
+        required:true
+    },
     gender:{
         type:String
     },
     password:{
         type:String
+    },
+    about:{
+        type:String,
+        default:"Hey Im Using This!"
     }
 })
 

@@ -35,22 +35,23 @@ app.post('/client',async(req,res)=>{
         await client.save()
         res.send('cliented added succesfully')
     }
-    catch{
-        res.status(400).send('something went wrong')
+    catch(err){
+        res.status(400).send('something went wrong',err)
     }
 })
 app.post('/login',async(req,res)=>{
     const client=new Login({
         firstName:"jay",
         lastName:"sharma",
-        email:"jay@gmail.com"
+        email:"jay@gmail.com",
+        age:22
     })
     try{
         await client.save()
         res.send('cliented added succesfully')
     }
-    catch{
-        res.status(400).send('something went wrong')
+    catch(err){
+        res.status(400).send('something went wrong',err)
     }
 })
 app.get('/login',async(req,res)=>{
@@ -82,7 +83,21 @@ app.delete('/login',async(req,res)=>{
     res.send('deleted login')
 })
 
+app.patch('/update',async(req,res)=>{
+    await Login.findByIdAndUpdate({"_id":req.body._id},req.body)
+    res.send('updated succefully')
+})
 
+app.post('/unique',async(req,res)=>{
+    const login=new Login(req.body)
+    try{
+        await login.save()
+        res.send('added')
+    }
+    catch{
+        res.send('wrong')
+    }
+})
 // app.use("/jk",(req,res)=>{
 //     res.send('im jk')
 // })
